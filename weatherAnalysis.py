@@ -13,10 +13,15 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-os.chdir("/home/chiattomaglio/Dropbox/PythonProjects/WeatherAnalysis")
+# this is to set the working directory... maybe not necessary.
+# os.chdir("/home/chiattomaglio/Dropbox/PythonProjects/WeatherAnalysis")
+# import the data frame
 df = pd.read_csv('history_export_Basel.csv', sep = ';', skiprows = 10)
+# import a different data frame where the year-month-day are merged into a single column.
 df_parsed = pd.read_csv('history_export_Basel.csv', sep = ';', skiprows = 10, parse_dates=[['Year', 'Month', 'Day']])
+# Set the year month day column as a datetime class
 df_parsed['Year_Month_Day'] = pd.to_datetime(df_parsed['Year_Month_Day'], format ='%Y-%m%d')
+# plot the data using matplotlib
 plt.plot(df_parsed['Year_Month_Day'], df_parsed['Temperature daily mean [2 m above gnd]'], '.')
 plt.xlabel("Year")
 plt.ylabel("Temperature (C)")
