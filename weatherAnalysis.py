@@ -1,6 +1,5 @@
 """
 # ==============================================================
-# Weather Analysis Script
 # Project created on: 19 Oct. 2018
 # Last updated on:    20 Oct. 2018
 # Created by:         Thomas Moore
@@ -22,17 +21,18 @@ df_parsed = pd.read_csv('history_export_Basel.csv', sep = ';', skiprows = 10, pa
 # Set the year month day column as a datetime class
 df_parsed['Year_Month_Day'] = pd.to_datetime(df_parsed['Year_Month_Day'], format ='%Y-%m%d')
 # plot the data using matplotlib
+plt.figure()
 plt.plot(df_parsed['Year_Month_Day'], df_parsed['Temperature daily mean [2 m above gnd]'], '.')
 plt.xlabel("Year")
-plt.ylabel("Temperature (C)")
-plt.savefig('fig_dateTemp.pdf')
-
+plt.ylabel("Temperature (°C)")
+plt.savefig('fig_dateTemp.pdf', dpi = 300)
 """
 If we want to use the initial data frame (df) and select only specific months (i.e. October), then we need to subset out the months that we are not interested in. This is done easily.
 """
 df_Oct = df.loc[df['Month'] == 10] # this selects only the month of October for every year.
+plt.figure()
 plt.scatter(df_Oct['Day'], df_Oct['Temperature daily mean [2 m above gnd]'], c = df_Oct['Year'], cmap = 'viridis')
 plt.colorbar()
 plt.xlabel("Day in October")
-plt.ylabel("Temperature (C)")
-plt.show()
+plt.ylabel("Temperature (°C)")
+plt.savefig('fig_OctTemp.pdf', dpi = 300)
