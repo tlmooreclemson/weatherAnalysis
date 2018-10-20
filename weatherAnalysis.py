@@ -36,3 +36,22 @@ plt.colorbar()
 plt.xlabel("Day in October")
 plt.ylabel("Temperature (°C)")
 plt.savefig('fig_OctTemp.pdf', dpi = 300)
+"""
+I want to find now the mean temperature in October.
+"""
+group_Days = df_Oct.groupby('Day')
+mean_Temps = group_Days.mean()
+plt.figure()
+plt.scatter(df_Oct['Day'], df_Oct['Temperature daily mean [2 m above gnd]'], c = df_Oct['Year'], cmap = 'viridis', alpha = 0.75)
+plt.colorbar()
+plt.plot(mean_Temps['Temperature daily mean [2 m above gnd]'], 's', c = 'r')
+plt.xlabel("Day in October")
+plt.ylabel("Temperature (°C)")
+plt.savefig('fig_OctTemp_mean.pdf', dpi = 300)
+"""
+Another way to look at the October data would be to plot the year vs. the day. Now I will try to plot a 2D heat map.
+"""
+#import seaborn as sns
+#df_heatmap = df_Oct.pivot(df_Oct['Day'], df_Oct['Year'], df_Oct['Temperature daily mean [2 m above gnd'])
+#ax = sns.heatmap(df_heatmap)
+#plt.savefig('fig_Oct_heatmap.pdf', dpi = 300)
